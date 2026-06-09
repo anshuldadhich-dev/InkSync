@@ -7,17 +7,27 @@ const RANK_SIZES  = [64, 52, 44];
 
 function AvatarCircle({ avatar, name, size }) {
   const initial = name ? name[0].toUpperCase() : '?';
+  const isUrl = avatar && (avatar.startsWith('data:') || avatar.startsWith('http'));
+
+  if (isUrl) {
+    return (
+      <img
+        src={avatar}
+        alt={initial}
+        style={{ width: size, height: size, borderRadius: '50%', objectFit: 'cover', display: 'block' }}
+      />
+    );
+  }
+
   return (
-    <div
-      style={{
-        width: size, height: size, borderRadius: '50%',
-        background: avatar && avatar.startsWith('#') ? avatar : '#6B7280',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: '#fff', fontWeight: 800, fontSize: size * 0.40,
-        userSelect: 'none',
-        boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.15)',
-      }}
-    >
+    <div style={{
+      width: size, height: size, borderRadius: '50%',
+      background: avatar && avatar.startsWith('#') ? avatar : '#6B7280',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: '#fff', fontWeight: 800, fontSize: size * 0.40,
+      userSelect: 'none',
+      boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.15)',
+    }}>
       {initial}
     </div>
   );

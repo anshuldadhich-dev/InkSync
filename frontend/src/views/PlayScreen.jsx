@@ -123,7 +123,7 @@ export default function PlayScreen() {
       style={{
         height: '100dvh',
         display: 'flex', flexDirection: 'column', gap: 6, padding: 6,
-        background: '#f1f5f9',
+        background: '#F4F6F8',
         boxSizing: 'border-box',
       }}
     >
@@ -165,7 +165,7 @@ export default function PlayScreen() {
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-white bg-opacity-85 rounded-xl pointer-events-none">
               <div className="text-center px-4">
                 {state.revealedWord && (
-                  <p className="text-2xl font-extrabold text-purple-700 mb-1">
+                  <p className="text-2xl font-extrabold mb-1" style={{ color: '#3B82F6' }}>
                     The word was: <em>{state.revealedWord}</em>
                   </p>
                 )}

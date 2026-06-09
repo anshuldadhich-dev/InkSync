@@ -16,24 +16,10 @@ export default function GameCanvas({ isDrawer }) {
   } = useCanvas(isDrawer);
 
   return (
-    <div className="relative flex items-start gap-2 w-full h-full">
-      {/* Floating vertical toolbar — only visible for the drawer */}
-      {isDrawer && (
-        <div className="flex-shrink-0 h-full overflow-y-auto">
-          <DrawingToolbar
-            tool={tool} setTool={setTool}
-            color={color} setColor={setColor}
-            brushSize={brushSize} setBrushSize={setBrushSize}
-            onClear={clearCanvas}
-            onFill={fillCanvas}
-            onUndo={undo}
-            onRedo={redo}
-          />
-        </div>
-      )}
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 
-      {/* Canvas — fills height; aspect-ratio is maintained by the browser */}
-      <div className="relative flex-1" style={{ minWidth: 0, minHeight: 0 }}>
+      {/* Canvas fills available height */}
+      <div style={{ flex: 1, minHeight: 0, position: 'relative' }}>
         <canvas
           ref={canvasRef}
           width={CANVAS_W}
@@ -48,20 +34,30 @@ export default function GameCanvas({ isDrawer }) {
           style={{
             width: '100%',
             height: '100%',
-            maxHeight: '100%',
             display: 'block',
-            backgroundColor: 'white',
-            border: '2px solid #d1d5db',
+            backgroundColor: '#ffffff',
+            border: '1.5px solid #E5E7EB',
             borderRadius: 8,
             cursor: isDrawer
-              ? tool === 'eraser' ? 'cell'
-                : tool === 'fill' ? 'crosshair'
-                : 'crosshair'
+              ? (tool === 'eraser' ? 'cell' : 'crosshair')
               : 'default',
             touchAction: 'none',
           }}
         />
       </div>
+
+      {/* Horizontal toolbar — always rendered, disabled for non-drawers */}
+      <DrawingToolbar
+        isDrawer={isDrawer}
+        tool={tool} setTool={setTool}
+        color={color} setColor={setColor}
+        brushSize={brushSize} setBrushSize={setBrushSize}
+        onClear={clearCanvas}
+        onFill={fillCanvas}
+        onUndo={undo}
+        onRedo={redo}
+      />
+
     </div>
   );
 }

@@ -37,10 +37,7 @@ export default function RoomSettings({ isHost }) {
   );
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-4" style={{ boxShadow: '0 4px 20px rgba(99,102,241,0.07)' }}>
-      <h3 className="text-sm font-bold mb-3 uppercase tracking-wide" style={{ color: '#8b5cf6' }}>
-        Room Settings {!isHost && <span className="text-gray-400 font-normal normal-case tracking-normal">(host only)</span>}
-      </h3>
+    <div>
 
       <Row label="Rounds">
         {isHost ? (
